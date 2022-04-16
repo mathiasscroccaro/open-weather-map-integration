@@ -3,3 +3,4 @@ Flask-RESTful==0.3.9
 cachetools==5.0.0
 requests==2.27.1
 schematics==2.1.1
+iso3166==2.0.2
