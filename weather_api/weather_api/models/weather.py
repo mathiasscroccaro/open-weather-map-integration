@@ -24,15 +24,38 @@ class Main(Model):
     temp_max = FloatType()
     pressure = IntType()
     humidity = IntType()
+    sea_level = IntType()
+    grnd_level = IntType()
 
 
 class Wind(Model):
     speed = FloatType()
     deg = IntType()
+    gust = FloatType()
 
 
 class Clouds(Model):
     all = IntType()
+
+
+class Rain(Model):
+    h1 = IntType()
+    h3 = IntType()
+
+    def __init__(self, d, context):
+        h1 = d.get('1h')
+        h3 = d.get('3h')
+        super().__init__()
+
+
+class Snow(Model):
+    h1 = IntType()
+    h3 = IntType()
+
+    def __init__(self, d, context):
+        h1 = d.get('1h')
+        h3 = d.get('3h')
+        super().__init__()
 
 
 class Sys(Model):
@@ -52,6 +75,8 @@ class Weather(Model):
     visibility = IntType()
     wind = ModelType(Wind)
     clouds = ModelType(Clouds)
+    rain = ModelType(Rain)
+    snow = ModelType(Snow)
     dt = IntType()
     sys = ModelType(Sys)
     timezone = IntType()
