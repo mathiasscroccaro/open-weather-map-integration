@@ -5,10 +5,12 @@ services:
   weather_api:
     container_name: weather_api
     build: ./weather_api
-    ports:
-      - "5000:5000"
+    # Uncomment for non socket API
+    #ports:
+    #  - "5000:5000"
     volumes:
       - ./weather_api:/weather_api
+      - /var/www/api:/var/www/api
     restart: always
     environment:
       - CACHE_TTL=300
