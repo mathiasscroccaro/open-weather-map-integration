@@ -1,5 +1,8 @@
 # DevGrid - Weather Wrapper API
 
+This application is creating an unix socket by default. If you want to run exposing
+a port, modify the files `docker-compose.yaml` and `weather_api/Dockerfile`
+
 # Examples
 
 http://api.mathias.dev.br:5000/temperature/london
