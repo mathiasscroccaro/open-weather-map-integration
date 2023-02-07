@@ -5,11 +5,11 @@ a port, modify the files `docker-compose.yaml` and `weather_api/Dockerfile`
 
 # Examples
 
-http://api.mathias.dev.br:5000/temperature/london
+http://api.mathias.dev.br/temperature/london
 
-http://api.mathias.dev.br:5000/temperature/campinas
+http://api.mathias.dev.br/temperature/campinas
 
-http://api.mathias.dev.br:5000/temperature?max=2
+http://api.mathias.dev.br/temperature?max=2
 
 # How to configure
 
