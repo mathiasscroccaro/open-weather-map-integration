@@ -1,0 +1,30 @@
+You can use this sequence diagram in the web site https://sequencediagram.org/
+
+actor User
+participant Integration
+participant Open Weather Map
+
+autoactivation on
+
+group Search by city name
+User->Integration: GET /temperature/:city-name\nWeatherDataRequest
+Integration
+alt Is TTL-cached city temperature?
+note over Integration: The integration has a TTL-Cached temperature\nstorage, in which the size and time to live are\nconfigured by environment variables.
+Integration-->User: 200, WeatherDataResponse
+activate Integration
+end
+note over Integration: Firstly, the integration needs to get the latitude\nand longitude coordinates from the provider. In a\nsecond step, the wheater condition is obtained.
+Integration->Open Weather Map: GET http://api.openweathermap.org/geo/1.0/direct?\nq={:city-name}&limit=1&appid={:api_key}\nLatLongDataRequest
+Open Weather Map-->Integration: 200, LatLongDataResponse
+Integration->Open Weather Map: GET https://api.openweathermap.org/data/2.5/weather?\nlat={:lat}&lon={:lon}&appid={:api_key}\nOpenWeatherMapDataRequest
+Open Weather Map-->Integration: 200, OpenWeatherMapDataResponse
+note over Integration: The integration stores the city's weather condition\nin the TTL-cached structure.
+Integration-->User: 200, WeatherDataRequest
+end
+
+group Get the last N cities or Get the whole cached data
+User->Integration: GET /temperature\nGET /temperature?max=N\nCachedWeatherDataRequest
+note over Integration: If there is an attribute "max=N", the last N\ncities' weather conditions are sent to the user,\notherwise is sent all cached cities data.
+Integration-->User: 200, CachedWeatherDataResponse
+end
