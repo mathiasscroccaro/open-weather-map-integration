@@ -5,13 +5,13 @@ This application works as an integration to the "Open Weather Map" data provider
 This application creates a Unix socket by default. The socket therefore can be exposed to the web using an Nginx-like reverse proxy application. If you want to run exposing
 a port, modify the files `docker-compose.yaml` and `weather_api/Dockerfile`
 
-## Examples
+## Usage
 
-http://api.mathias.dev.br/temperature/london
-
-http://api.mathias.dev.br/temperature/campinas
-
-http://api.mathias.dev.br/temperature?max=2
+| Request                      | Description                           | Example                               |
+|------------------------------|---------------------------------------|---------------------------------------|
+| **GET** /temperature             | Gets all the cached temperature data  | api.mathias.dev.br/temperature        |
+| **GET** /temperature?max=N       | Gets last N cached temperature data   | api.mathias.dev.br/temperature?max=2  |
+| **GET** /temperature/:city-name | Gets the temperature of the city-name | api.mathias.dev.br/temperature/london |
 
 ## How to configure
 
