@@ -13,6 +13,6 @@ services:
       - /var/www/api:/var/www/api
     restart: always
     environment:
-      - CACHE_TTL=300
-      - DEFAULT_MAX_NUMBER=10
-      - API_KEY=eba947a9dee289afd7c463fcfe3d99d1
+      - CACHE_TTL=${CACHE_TTL:-300}
+      - DEFAULT_MAX_NUMBER=${DEFAULT_MAX_NUMBER:-2}
+      - API_KEY=${API_KEY:?error}
